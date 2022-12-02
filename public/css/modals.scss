@@ -1,0 +1,76 @@
+.modal-header {
+    background: #088dcd;
+    color: #ffc233;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    // flex-flow: row-reverse;
+    text-align: center;
+    padding: 0 20px;
+    padding-bottom: 5px;
+   
+    .close {
+        color: white;
+        opacity: 1;
+        display: flex;
+        // align-self: flex-start;
+        padding-top: 5px;
+    }
+}
+
+// modal title text logo
+h3 {
+    &#myModalLabel {
+        flex: 1;
+        text-transform: uppercase;
+        span {
+            color: white;
+        }
+    }
+}
+
+a.back,
+a.next,
+a.back:focus,
+a.next:focus,
+a.back:active,
+a.next:active {
+    color: white;
+    background: #ffc233;
+    padding: 10px 60px;
+    margin: 0;
+    font-weight: bold;
+}
+
+a.back:hover,
+a.next:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-footer {
+    display: flex;
+}
+
+.right-footer {
+    flex: 1;
+}
+
+// prevent nav tabs from collapsing on mobile
+// using flex to fill the modal width
+// otherwise use table-cell and float
+.nav-justified {
+    display: flex;
+    li {
+        flex: 1;
+        // display: table-cell;
+        // float: left;
+    }
+}

@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "company": "Solution Group",
+      "email": "SolutionGroup@gmail.com",
+      "contact": "082173737232"
+    },
+    {
+      "id": 2,
+      "company": "Solution Tech",
+      "email": "SolutionTech@gmail.com",
+      "contact": "0867897677665"
+    },
+    {
+      "company": "pt. Mikhael",
+      "email": "mikael@yahoo.co.id",
+      "contact": "441",
+      "id": 3
+    },
+    {
+      "company": "aqua",
+      "email": "aqua@yahoo.co.id",
+      "contact": "449",
+      "id": 4
+    },
+    {
+      "company": "aqua2",
+      "email": "aqua@yahoo.co.id",
+      "contact": "449",
+      "id": 5
+    }
+  ]
+}
