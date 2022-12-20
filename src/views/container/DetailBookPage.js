@@ -1,18 +1,14 @@
 import Cookies from "js-cookie";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  getAllCategory,
-  GetDetailBook,
-  getDetailBook,
-} from "../../store/action/BooksAction";
+import { getAllCategory, getDetailBook } from "../../store/action/BooksAction";
 import { API, BASE_URL } from "../../store/api";
 import { Catalog, Footer, Header, Sidebar, Sidemenu } from "../components";
-import { Comments, Loading, SameCatalog, Star } from "../components/Atom";
+import { Comments, Error404, Loading, Reviews, Star } from "../components/Atom";
 import AskComponent from "../components/Molekul/AskComponent";
 import BottomBarComponent from "../components/Molekul/BottomBarComponent";
 import ChatComponent from "../components/Molekul/ChatComponent";
@@ -21,6 +17,7 @@ import MessagePopupCompoenent from "../components/Molekul/MessagePopupComponent"
 import NewPostComponent from "../components/Molekul/NewPostComponent";
 import SlideMessComponent from "../components/Molekul/SlideMessComponent";
 import "./../../static/css/HomePage.css";
+import "./detailbook.css";
 
 const DetailBookPage = () => {
   const {
@@ -35,20 +32,61 @@ const DetailBookPage = () => {
     getListCatalogError,
   } = useSelector((state) => state.BooksReducer);
 
+  const [count, setCount] = useState(1);
+  const [error, setError] = useState(null);
+
   const dispatch = useDispatch();
   let { slug } = useParams();
   const navigate = useNavigate();
   const token = Cookies.get("token");
-
+ 
   useEffect(() => {
     if (token) {
-      const jwtToken = atob(token);
-      dispatch(getDetailBook(slug, jwtToken));
+      dispatch(getDetailBook(slug, token));
       dispatch(getAllCategory());
     } else {
+      console.log('benrrr');
       navigate("/login", { replace: true });
     }
   }, [token]);
+
+  const handleMinus = () => {
+    if (count > 1) {
+      setCount(count - 1);
+      setError(null);
+    } else {
+      setError("Please Enter a Valid Number");
+    }
+  };
+
+  const handlePlus = () => {
+    if (count === null || count === "") {
+      setCount(1);
+    } else {
+      setCount(count + 1);
+      setError(null);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    navigate("/checkout", {
+      state: {
+        qty: count,
+        uid: getDetailBookDataBook.uid,
+        author_book: getDetailBookDataBook.author_book,
+        title_book: getDetailBookDataBook.title_book,
+        publish_book: getDetailBookDataBook.publish_book,
+        publish_date: getDetailBookDataBook.publish_date,
+        sinopsis_book: getDetailBookDataBook.sinopsis_book,
+        cover_book: getDetailBookDataBook.cover_book,
+        name_catalog: getDetailBookDataBook.name_catalog,
+      },
+    });
+  };
+
+
 
   return (
     <>
@@ -140,7 +178,7 @@ const DetailBookPage = () => {
                                   ) : getDetailBookDataError ? (
                                     getDetailBookDataBook
                                   ) : (
-                                    "data null"
+                                    "data nulll"
                                   )}
                                 </ul>
                                 <h4>{getDetailBookDataBook.title_book}</h4>
@@ -171,15 +209,36 @@ const DetailBookPage = () => {
                                     {getDetailBookDataBook.publish_book}
                                   </li>
                                 </ul>
+                                <div className="number">
+                                  <button
+                                    onClick={handleMinus}
+                                    className="minus"
+                                  >
+                                    -
+                                  </button>
+                                  <input
+                                    className="inputan"
+                                    readOnly
+                                    type="text"
+                                    value={
+                                      count > getDetailBookDataBook.qty
+                                        ? null
+                                        : count
+                                    }
+                                    onChange={setCount}
+                                  />
+                                  <button onClick={handlePlus} className="plus">
+                                    +
+                                  </button>
+                                </div>
                                 <div className="sale-button">
-                                  <a
-                                    href="#"
-                                    title=""
+                                  <button
+                                    onClick={(event) => handleSubmit(event)}
                                     className="main-btn purchase-btn"
                                   >
                                     <i className="icofont-cart-alt" /> Borrow
                                     Now
-                                  </a>
+                                  </button>
                                 </div>
                               </div>
                             </div>
@@ -187,7 +246,7 @@ const DetailBookPage = () => {
                         ) : getDetailBookDataError ? (
                           getDetailBookDataError
                         ) : (
-                          "Data null"
+                          "Data nullls"
                         )}
                         <div className="comment-area product mt-5">
                           <h4 className="comment-title">Comment</h4>
@@ -202,41 +261,11 @@ const DetailBookPage = () => {
                             ) : getDetailBookDataError ? (
                               getDetailBookDataError
                             ) : (
-                              "Data null"
+                              <Error404 />
                             )}
                           </ul>
-                          <div className="add-comment">
-                            <span>Give Your Rating</span>
-                            <ul className="stars">
-                              <li>
-                                <i className="icofont-star" />
-                              </li>
-                              <li>
-                                <i className="icofont-star" />
-                              </li>
-                              <li>
-                                <i className="icofont-star" />
-                              </li>
-                              <li>
-                                <i className="icofont-star" />
-                              </li>
-                              <li>
-                                <i className="icofont-star" />
-                              </li>
-                            </ul>
-                            <form method="post" className="c-form">
-                              <input type="text" placeholder="Name" />
-                              <input type="text" placeholder="Email" />
-                              <textarea
-                                rows={4}
-                                placeholder="Write Message"
-                                defaultValue={""}
-                              />
-                              <button className="main-btn" type="submit">
-                                Add Review
-                              </button>
-                            </form>
-                          </div>
+                          {/* Comments */}
+                          <Reviews name={getDetailBookDataBook} />
                         </div>
                       </div>
                       {/* Same Catalog */}

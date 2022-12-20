@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CategoryPage from "../views/container/CategoryPage";
+import CheckoutPage from "../views/container/CheckoutPage";
 import DetailBookPage from "../views/container/DetailBookPage";
 import HistoryPage from "../views/container/HistoryPage";
 import HomePage from "../views/container/HomePage";
@@ -30,6 +31,7 @@ const MainRouter = () => {
         <Route path="/category/:uid" element={<CategoryPage />} />
         <Route path="/books/:slug" element={<DetailBookPage />} />
         <Route path="/history" element={<HistoryPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
 
         {/* Page Login */}
         <Route exact path="/login" element={<LoginPage />} />

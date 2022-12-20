@@ -2,6 +2,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getAllCategory,
   getMostRatingBooks,
@@ -98,25 +99,25 @@ const MostRatingPage = () => {
                             getListMostRatingDataResult.map((data, key) => {
                               return (
                                 <div className="col-lg-3 col-md-3 col-sm-6">
-                                  <div className="book-post">
-                                    <figure>
-                                      <a href="book-detail.html" title="">
-                                        <img
-                                          style={{ width: 200, height: 290 }}
-                                          src={`${
-                                            BASE_URL +
-                                            API +
-                                            "/" +
-                                            data.cover_book
-                                          }`}
-                                          alt=""
-                                        />
-                                      </a>
-                                    </figure>
-                                    <a href="book-detail.html" title="">
-                                      {data.title_book}
-                                    </a>
-                                  </div>
+                                  <Link to={"/books/" + data.slug}>
+                                    <div className="book-post">
+                                      <figure>
+                                        <a title="">
+                                          <img
+                                            style={{ width: 200, height: 290 }}
+                                            src={`${
+                                              BASE_URL +
+                                              API +
+                                              "/" +
+                                              data.cover_book
+                                            }`}
+                                            alt=""
+                                          />
+                                        </a>
+                                      </figure>
+                                      <a title="">{data.title_book}</a>
+                                    </div>
+                                  </Link>
                                 </div>
                               );
                             })

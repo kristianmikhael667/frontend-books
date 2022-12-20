@@ -1,9 +1,7 @@
 import React from "react";
 
 const Star = (props) => {
-  console.log("siniii ", props.data);
   if (props.data >= 5) {
-    console.log("msuk 5 star");
     return (
       <>
         <li>

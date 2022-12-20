@@ -1,0 +1,51 @@
+  .number {
+      margin-bottom: 10px;
+  }
+  
+  .minus {
+      width: 20px;
+      height: 20px;
+      background: #f2f2f2;
+      border-radius: 4px;
+      padding: 8px 5px 22px 5px;
+      border: 1px solid #ddd;
+      /* display: inline-block; */
+      vertical-align: middle;
+      margin-right: 10px;
+      text-align: center;
+  }
+  
+  .plus {
+      width: 20px;
+      height: 20px;
+      background: #f2f2f2;
+      border-radius: 4px;
+      padding: 8px 5px 22px 5px;
+      border: 1px solid #ddd;
+      /* display: inline-block; */
+      vertical-align: middle;
+      margin-left: 10px;
+      text-align: center;
+  }
+  
+  .inputan {
+      height: 34px;
+      width: 50px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+  }
+  
+  .inputans {
+      height: 34px;
+      width: 50px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+  }

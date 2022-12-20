@@ -1,43 +1,49 @@
+import Cookies from "js-cookie";
 import React, { useEffect } from "react";
-import "./../../static/css/HomePage.css";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-import {
-  Header,
-  Sidebar,
-  Footer,
-  Filters,
-  Catalog,
-  Event,
-} from "../components";
-import { BASE_URL, API } from "../../store/api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllBooks,
-  getAllCategory,
-  getMostViewBooks,
-} from "../../store/action/BooksAction";
-import { Loading } from "../components/Atom";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { API, BASE_URL } from "../../store/api";
+import { Footer, Header, Sidebar } from "../components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { postCheckout } from "../../store/action/BorrowAction";
 
-const MostViewPage = () => {
+const CheckoutPage = () => {
   const {
-    getListMostViewDataLoading,
-    getListMostViewDataResult,
-    getListMostViewDataError,
+    getListHistoryBookLoading,
+    getListHistoryBookResult,
+    getListHistoryBookError,
+  } = useSelector((state) => state.BorrowReducer);
 
-    getListCatalogLoading,
-    getListCatalogResult,
-    getListCatalogError,
-  } = useSelector((state) => state.BooksReducer);
-
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = Cookies.get("token");
+
+  console.log("dataa kirim count ", location.state.qty);
+  console.log("dataa kirim 2 ", location.state.uid);
 
   useEffect(() => {
-    dispatch(getMostViewBooks());
-    dispatch(getAllCategory());
-  }, [dispatch]);
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
+  }, [token]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    toast.success("Success borrow book");
+    const jwtToken = atob(token);
+    dispatch(
+      postCheckout({
+        book_uid: location.state.uid,
+        qty: location.state.qty,
+        token: jwtToken,
+      })
+    );
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 2000);
+  };
   return (
     <>
       <div className="theme-layout">
@@ -84,87 +90,74 @@ const MostViewPage = () => {
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
-                  <div id="page-contents" className="row merged20">
-                    <div className="col-lg-9">
-                      <div className="main-wraper">
-                        <h4 className="main-title">Books</h4>
-                        {/* Filter */}
-                        <Filters />
+                  <div id="page-contents" className="row">
+                    <div className="col-lg-12">
+                      <div className="main-wraper stick-widget">
+                        <div className="cart-summary">
+                          <h4 className="main-title">
+                            <ToastContainer />
+                            <i className="icofont-cart-alt" />
+                            Checkout Book
+                          </h4>
 
-                        <div className="row col-xs-6">
-                          {/* Map */}
-                          {getListMostViewDataLoading ? (
-                            <Loading />
-                          ) : getListMostViewDataResult &&
-                            getListMostViewDataResult.length > 0 ? (
-                            getListMostViewDataResult.map((data, key) => {
-                              return (
-                                <div className="col-lg-3 col-md-3 col-sm-6">
-                                  <Link to={"/books/" + data.slug}>
-                                    <div className="book-post">
-                                      <figure>
-                                        <a title="">
-                                          <img
-                                            style={{ width: 200, height: 290 }}
-                                            src={`${
-                                              BASE_URL +
-                                              API +
-                                              "/" +
-                                              data.cover_book
-                                            }`}
-                                            alt=""
-                                          />
-                                        </a>
-                                      </figure>
-                                      <a title="">{data.title_book}</a>
-                                    </div>
-                                  </Link>
-                                </div>
-                              );
-                            })
-                          ) : getListMostViewDataError ? (
-                            getListMostViewDataError
-                          ) : (
-                            "data null"
-                          )}
+                          <ul>
+                            <li>
+                              <img
+                                src={
+                                  BASE_URL +
+                                  API +
+                                  "/" +
+                                  location.state.cover_book
+                                }
+                                style={{ width: "100%", height: 490 }}
+                                alt=""
+                              />
+                              <div className="mt-3">
+                                <h2>{location.state.title_book} </h2>
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html: location.state.sinopsis_book,
+                                  }}
+                                ></p>
+                              </div>
+                              <span className="mt-3">
+                                Qty :{" "}
+                                <b style={{ color: "red" }}>
+                                  {location.state.qty}
+                                </b>
+                              </span>
+                            </li>
+                            <span className="mt-3">
+                              Author : <b>{location.state.author_book}</b>
+                            </span>
+                            <br />
+                            <span className="mt-3">
+                              Publish Book :{" "}
+                              <b>{location.state.publish_book}</b>
+                            </span>
+                            <br />
+                            <span className="mt-3">
+                              Publish Date :{" "}
+                              <b>{location.state.publish_date}</b>
+                            </span>
+                            <br />
+                            <span className="mt-3">
+                              Catalog : <b>{location.state.name_catalog}</b>
+                            </span>
+                            <li className="grand-total">
+                              <span>Grand Total</span>
+                              <i>FREE</i>
+                            </li>
+                          </ul>
 
-                          {/* Endmap */}
+                          <button
+                            className="main-btn purchase-btn"
+                            onClick={(event) => handleSubmit(event)}
+                          >
+                            Borrow Book
+                          </button>
                         </div>
                       </div>
-                    </div>
-                    {/* Catalog */}
-                    <div className="col-lg-3">
-                      <aside className="sidebar static right">
-                        <div className="widget">
-                          <h4 className="widget-title">Catalog</h4>
-
-                          {/* map */}
-                          {getListCatalogLoading ? (
-                            <Loading />
-                          ) : getListCatalogResult &&
-                            getListCatalogResult.length > 0 ? (
-                            getListCatalogResult.map((data, key) => {
-                              console.log("data ", data);
-                              return <Catalog key={key} name={data} />;
-                            })
-                          ) : getListCatalogError ? (
-                            getListCatalogError
-                          ) : (
-                            "Data null"
-                          )}
-                        </div>
-
-                        <div className="widget">
-                          <h4 className="widget-title">
-                            Explor Events{" "}
-                            <a className="see-all" href="#" title="">
-                              See All
-                            </a>
-                          </h4>
-                          {/* Map Event*/}
-                          <Event />
-                        </div>
-                      </aside>
                     </div>
                   </div>
                 </div>
@@ -1259,5 +1252,4 @@ const MostViewPage = () => {
     </>
   );
 };
-
-export default MostViewPage;
+export default CheckoutPage;

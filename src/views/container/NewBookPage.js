@@ -14,6 +14,7 @@ import { BASE_URL, API } from "../../store/api";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory, getNewBooks } from "../../store/action/BooksAction";
 import { Error404, Loading } from "../components/Atom";
+import { Link } from "react-router-dom";
 
 const NewBookPage = () => {
   const {
@@ -94,28 +95,27 @@ const NewBookPage = () => {
                           ) : getListNewBookDataResult &&
                             getListNewBookDataResult.length > 0 ? (
                             getListNewBookDataResult.map((data, key) => {
-                              console.log("sss", data);
                               return (
                                 <div className="col-lg-3 col-md-3 col-sm-6">
-                                  <div className="book-post">
-                                    <figure>
-                                      <a href="book-detail.html" title="">
-                                        <img
-                                          style={{ width: 200, height: 290 }}
-                                          src={`${
-                                            BASE_URL +
-                                            API +
-                                            "/" +
-                                            data.cover_book
-                                          }`}
-                                          alt=""
-                                        />
-                                      </a>
-                                    </figure>
-                                    <a href="book-detail.html" title="">
-                                      {data.title_book}
-                                    </a>
-                                  </div>
+                                  <Link to={"/books/" + data.slug}>
+                                    <div className="book-post">
+                                      <figure>
+                                        <a title="">
+                                          <img
+                                            style={{ width: 200, height: 290 }}
+                                            src={`${
+                                              BASE_URL +
+                                              API +
+                                              "/" +
+                                              data.cover_book
+                                            }`}
+                                            alt=""
+                                          />
+                                        </a>
+                                      </figure>
+                                      <a title="">{data.title_book}</a>
+                                    </div>
+                                  </Link>
                                 </div>
                               );
                             })

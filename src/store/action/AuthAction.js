@@ -28,6 +28,7 @@ export const postLoginUser = (data) => {
           res.data.code == 404 ||
           res.data.code == 500
         ) {
+          console.log('salah');
           dispatch({
             type: LOGIN_USER,
             payload: {
@@ -37,6 +38,7 @@ export const postLoginUser = (data) => {
             },
           });
         } else {
+          console.log('btl');
           const token = res.data.token;
           const tokenBase64 = btoa(token);
           Cookies.set("token", tokenBase64, { expires: 1 });

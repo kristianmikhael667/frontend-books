@@ -4,4 +4,5 @@ import Comments from "./Comments";
 import SameCatalog from "./SameCatalog";
 import Loading from "./Loading";
 import Error404 from "./Error404";
-export { Login, Star, Comments, SameCatalog, Loading, Error404 };
+import Reviews from "./Reviews";
+export { Login, Star, Comments, SameCatalog, Loading, Error404, Reviews };

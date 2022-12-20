@@ -6,6 +6,7 @@ import {
   FETCH_GET_MOST_RATING,
   FETCH_GET_MOST_VIEW,
   FETCH_GET_NEW_BOOKS,
+  FETCH_POST_RATING_BOOK,
 } from "../action/BooksAction";
 
 const initialState = {
@@ -38,6 +39,11 @@ const initialState = {
   getListCatalogProductLoading: false,
   getListCatalogProductResult: false,
   getListCatalogProductError: false,
+
+  postRateBookLoading: false,
+  postRateBookResult: false,
+  postRateBookStatus: false,
+  postRateBookError: false,
 };
 
 const BooksReducer = (state = initialState, action) => {
@@ -78,6 +84,16 @@ const BooksReducer = (state = initialState, action) => {
         getDetailBookComment: action.payload.comment,
         getDetailBookReviewer: action.payload.reviewer,
         getDetailBookDataError: action.payload.errorMassage,
+      };
+    case FETCH_POST_RATING_BOOK:
+      console.log("4. Masuk Reducer: ", action);
+
+      return {
+        ...state,
+        postRateBookLoading: action.payload.loading,
+        postRateBookResult: action.payload.data,
+        postRateBookStatus: action.payload.status,
+        postRateBookError: action.payload.errorMassage,
       };
     case FETCH_GET_CATALOG:
       return {
