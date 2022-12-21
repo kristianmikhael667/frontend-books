@@ -2,16 +2,13 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import Rating from "react-rating";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { postRatingBook } from "../../../../store/action/BooksAction";
-import { useNavigate } from "react-router-dom";
 
 const Reviews = (props) => {
-  const {
-    postRateBookLoading,
-    postRateBookResult,
+  const {   
     postRateBookStatus,
-    postRateBookError,
   } = useSelector((state) => state.BooksReducer);
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
@@ -28,7 +25,7 @@ const Reviews = (props) => {
     if (!rating || !comment) {
       toast.error("Rating and Comment wajib diisi");
     } else {
-      if (postRateBookStatus == 404) {
+      if (postRateBookStatus === 404) {
         toast.error("Sudah Rate");
       } else {
         toast.success("Success Rate");
