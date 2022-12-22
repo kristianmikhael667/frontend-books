@@ -83,7 +83,7 @@ const HomePage = () => {
                   <div id="page-contents" className="row merged20">
                     <div className="col-lg-9">
                       <div className="main-wraper">
-                        <h4 className="main-title">Books</h4>
+                        <h4 className="main-title">Bookss</h4>
                         {/* Filter */}
                         <Filters />
 
