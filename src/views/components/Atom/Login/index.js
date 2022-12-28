@@ -19,7 +19,7 @@ const Login = () => {
       const payload = jwt_decode(jwtToken);
       const userFromPayload = payload.profile_photo_path;
       const IMG = BASE_URL + API;
-      user.avatar = `${IMG}/${userFromPayload}`;
+      user.avatar = userFromPayload;
       const data = JSON.parse(dataUser);
       user.fullname = data.fullname;
       setIsLogin(true);
@@ -28,10 +28,11 @@ const Login = () => {
   }, [token]);
 
   if (isLogin) {
+    console.log("Sss ", user.avatar);
     return (
       <div className="user-dp">
         <a href="profile-page2.html" title="">
-          <img style={{ width: 35, height: 35 }} alt="" src={user.avatar} />
+          <img style={{ width: 35, height: 35 }} alt="" src={user.avatar == null ? "images/activity.png" : ""} />
           <div className="name">
             <h4>{user.fullname}</h4>
           </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { API, BASE_URL } from "../../../store/api";
 
 function Catalog(props) {
   return (
     <div className="popular-book">
       <figure>
-        <img src="images/resources/book10.jpg" alt="" />
+        <img width={100} height={200} src={BASE_URL + API + "/" + props.name.image_catalog} alt="" />
       </figure>
       <div className="book-about">
         <h6>
