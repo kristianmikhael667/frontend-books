@@ -16,9 +16,7 @@ function Header() {
   const token = Cookies.get("token");
 
   const Logout = (event) => {
-    console.log("mssss k");
     event.preventDefault();
-    console.log("mssss k");
 
     const jwtToken = atob(token);
     const payload = jwt_decode(jwtToken);

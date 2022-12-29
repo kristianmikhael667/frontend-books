@@ -215,8 +215,8 @@ export const getDetailBook = (id, token) => {
           });
         } else {
           //Berhasil Get API
-          // console.log("msk 200");
-          // console.log("apa 200 ", response.data.data);
+          // msk 200");
+          // apa 200 ", response.data.data);
 
           dispatch({
             type: FETCH_GET_DETAIL_BOOK,
@@ -231,7 +231,6 @@ export const getDetailBook = (id, token) => {
         }
       })
       .catch((error) => {
-        console.log("error apa ini ", error.message);
         //Gagal Get API
         dispatch({
           type: FETCH_GET_DETAIL_BOOK,
@@ -343,7 +342,6 @@ export const postRatingBook = (data) => {
         errorMassage: false,
       },
     });
-    console.log("Saaat ", data);
     //Get API
     const jwtToken = atob(data.token);
 
@@ -358,14 +356,12 @@ export const postRatingBook = (data) => {
       },
     })
       .then((response) => {
-        console.log("paaa ", response);
         if (
           response.data.code == 401 ||
           response.data.code == 433 ||
           response.data.code == 190 ||
           response.data.code == 404
         ) {
-          console.log("msk 404 udh rate", response.data.code);
           dispatch({
             type: FETCH_POST_RATING_BOOK,
             payload: {
@@ -376,7 +372,6 @@ export const postRatingBook = (data) => {
             },
           });
         } else {
-          console.log("good rate");
           dispatch({
             type: FETCH_POST_RATING_BOOK,
             payload: {

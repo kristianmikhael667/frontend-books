@@ -21,7 +21,6 @@ const HistoryPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = Cookies.get("token");
-  console.log("gk ada ", token);
   useEffect(() => {
     if (token) {
       const jwtToken = atob(token);

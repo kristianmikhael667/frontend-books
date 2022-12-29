@@ -110,7 +110,7 @@ const DetailBookPage = () => {
                     <div className="col-lg-9">
                       <div className="main-wraper">
                         {getDetailBookDataLoading ? (
-                          <p> Loading </p>
+                         <Loading/>
                         ) : getDetailBookDataBook ? (
                           <div className="row">
                             <div className="col-lg-4 col-md-4 col-sm-4">
@@ -252,7 +252,7 @@ const DetailBookPage = () => {
                           <h4 className="comment-title">Comment</h4>
                           <ul className="comments">
                             {getDetailBookDataLoading ? (
-                              <p>Loading naomi ... </p>
+                              <Loading/>
                             ) : getDetailBookComment &&
                               getDetailBookComment.length > 0 ? (
                               getDetailBookComment.map((data, key) => {

@@ -30,7 +30,6 @@ const NewBookPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("msk sini dlu 1");
     dispatch(getNewBooks());
     dispatch(getAllCategory());
   }, [dispatch]);
@@ -143,7 +142,6 @@ const NewBookPage = () => {
                           ) : getListCatalogResult &&
                             getListCatalogResult.length > 0 ? (
                             getListCatalogResult.map((data, key) => {
-                              console.log("data ", data);
                               return <Catalog key={key} name={data} />;
                             })
                           ) : getListCatalogError ? (

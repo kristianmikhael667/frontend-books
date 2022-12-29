@@ -14,7 +14,6 @@ const SamplePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("1. Use effect component did mount");
     dispatch(getFetchSampleData());
   }, [dispatch]);
   return (

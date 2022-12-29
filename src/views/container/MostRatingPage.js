@@ -143,7 +143,6 @@ const MostRatingPage = () => {
                           ) : getListCatalogResult &&
                             getListCatalogResult.length > 0 ? (
                             getListCatalogResult.map((data, key) => {
-                              console.log("data ", data);
                               return <Catalog key={key} name={data} />;
                             })
                           ) : getListCatalogError ? (

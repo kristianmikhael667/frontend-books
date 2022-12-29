@@ -13,7 +13,6 @@ const initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      console.log("4. reducer login");
       return {
         ...state,
         loginDataLoading: action.payload.loading,

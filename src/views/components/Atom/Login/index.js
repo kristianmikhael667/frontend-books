@@ -28,11 +28,10 @@ const Login = () => {
   }, [token]);
 
   if (isLogin) {
-    console.log("Sss ", user.avatar);
     return (
       <div className="user-dp">
         <a href="profile-page2.html" title="">
-          <img style={{ width: 35, height: 35 }} alt="" src={user.avatar == null ? "images/activity.png" : ""} />
+          <img style={{ width: 35, height: 35 }} alt="" src={user.avatar == null ? "images/activity.png" : BASE_URL + API + '/' + user.avatar} />
           <div className="name">
             <h4>{user.fullname}</h4>
           </div>

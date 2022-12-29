@@ -19,9 +19,6 @@ const Reviews = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("rating ", rating);
-    console.log("comment ", comment);
-    console.log("datanya ini ", props.name.uid);
     if (!rating || !comment) {
       toast.error("Rating and Comment wajib diisi");
     } else {
@@ -38,7 +35,6 @@ const Reviews = (props) => {
             token: token,
           })
         );
-        console.log("haas", postRateBookStatus);
         setTimeout(() => {
           navigate(0);
         }, 2000);

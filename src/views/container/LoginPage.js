@@ -22,10 +22,7 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("masuk ke 1");
-    console.log("isisnya ", email);
     if (!email || !password) {
-      console.log("emty");
       toast.error("Email and Password wajib diisi!!");
     } else {
 

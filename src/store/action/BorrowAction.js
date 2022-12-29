@@ -47,7 +47,6 @@ export const getAllHistory = (token) => {
 
 // Get All History Borrow Book
 export const postCheckout = (data) => {
-  console.log("daaa ", data);
   return (dispatch) => {
     dispatch({
       type: FETCH_POST_CHECKOUT,

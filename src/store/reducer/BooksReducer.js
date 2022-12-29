@@ -86,8 +86,6 @@ const BooksReducer = (state = initialState, action) => {
         getDetailBookDataError: action.payload.errorMassage,
       };
     case FETCH_POST_RATING_BOOK:
-      console.log("4. Masuk Reducer: ", action);
-
       return {
         ...state,
         postRateBookLoading: action.payload.loading,

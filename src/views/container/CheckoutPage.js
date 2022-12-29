@@ -20,9 +20,6 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
   const token = Cookies.get("token");
 
-  console.log("dataa kirim count ", location.state.qty);
-  console.log("dataa kirim 2 ", location.state.uid);
-
   useEffect(() => {
     if (!token) {
       navigate("/login", { replace: true });

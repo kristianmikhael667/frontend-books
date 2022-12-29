@@ -20,8 +20,7 @@ const initialState = {
 
 const SampleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SAMPLE_DATA:
-      console.log("4. Masuk Reducer: ", action);
+    case FETCH_SAMPLE_DATA:   
       return {
         ...state,
         getListSampleDataLoading: action.payload.loading,
@@ -29,7 +28,6 @@ const SampleReducer = (state = initialState, action) => {
         getListSampleDataError: action.payload.errorMassage,
       };
     case DETAIL_FETCH_SAMPLE_DATA:
-      console.log("4. Masuk Reducer: ", action);
       return {
         ...state,
         getDetailListSampleDataLoading: action.payload.loading,
@@ -37,7 +35,6 @@ const SampleReducer = (state = initialState, action) => {
         getDetailListSampleDataError: action.payload.errorMassage,
       };
     case ADD_SAMPLE_DATA:
-      console.log("4. Masuk Reducer: ", action);
       return {
         ...state,
         postInputSampleDataLoading: action.payload.loading,

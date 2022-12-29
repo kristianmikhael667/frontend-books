@@ -92,7 +92,6 @@ export const getDetailFetchSampleData = (data) => {
 };
 
 export const postInputSampleData = (data) => {
-  console.log("2. Masuk ke action");
   return (dispatch) => {
     //Loading
     dispatch({
