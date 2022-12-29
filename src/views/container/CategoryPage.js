@@ -3,6 +3,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import {
   getAllBooks,
   getAllCategory,
@@ -109,13 +110,10 @@ const CategoryPage = () => {
                                     <i className="icofont-clock-time" /> january
                                     23, 2021
                                   </span>
-                                  <a
-                                    href="blog-detail.html"
-                                    title=""
-                                    className="button primary circle"
-                                  >
-                                    View Book
-                                  </a>
+                                  <Link className="button primary circle" to={"/books/" + data.slug}>
+                                  View Book
+                                    </Link>
+                                  
                                 </div>
                               </div>
                             );
